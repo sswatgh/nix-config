@@ -1,0 +1,34 @@
+# Nix specific
+result
+result-*
+*.gcov
+*.gcda
+*.gcno
+.history
+
+# System files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets 
+secrets/
+*.age
+*.key
+.env
+.env.local
+
+# Local overrides
+extra-configs.nix
+local.nix
