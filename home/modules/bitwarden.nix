@@ -44,7 +44,6 @@ in
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
 
-    # Auto-start Bitwarden (macOS specific)
     launchd.agents.bitwarden = mkIf (cfg.autostart && pkgs.stdenv.isDarwin) {
       enable = true;
       config = {
@@ -58,12 +57,11 @@ in
       };
     };
 
-    # For Linux systems (autostart)
     xdg.configFile."autostart/bitwarden.desktop" = mkIf (cfg.autostart && pkgs.stdenv.isLinux) {
       source = "${cfg.package}/share/applications/bitwarden.desktop";
     };
 
-    # Bitwarden CLI configuration 
+    # Bitwarden CLI configuration  # package corrupted
 #    home.file.".config/Bitwarden CLI/data.json" = mkIf (cfg.vaultTimeout != null) {
 #      text = builtins.toJSON {
 #        vaultTimeout = cfg.vaultTimeout;
