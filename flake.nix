@@ -59,6 +59,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+            backupFileExtension = "backup";
             users.ssw = {
               imports = [
                 ./home/base.nix
