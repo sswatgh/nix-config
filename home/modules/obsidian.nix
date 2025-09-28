@@ -1,6 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, platform, ... }:
 
-{
+lib.mkIf platform.isDarwin {
+  home.packages = [ pkgs.obsidian ];
+  
   home.activation.installObsidianPlugins = let
     pluginScript = pkgs.writeShellScript "install-obsidian-plugins" ''
       echo "Setting up Obsidian plugins..."
@@ -19,7 +21,6 @@
           mkdir -p "$plugin_dir"
           ${pkgs.curl}/bin/curl -L "$plugin_url" -o "$plugin_dir/main.js"
           
-          # Create proper manifest.json with correct plugin ID
           cat > "$plugin_dir/manifest.json" << EOF
 {
   "id": "$plugin_id",
@@ -37,7 +38,6 @@ EOF
         fi
       }
       
-      # Community plugins with correct IDs
       install_plugin "obsidian-tasks-plugin" "obsidian-tasks-plugin" "https://github.com/obsidian-tasks-group/obsidian-tasks-plugin/releases/latest/download/main.js"
       install_plugin "calendar" "calendar" "https://github.com/liamcain/obsidian-calendar-plugin/releases/latest/download/main.js"
       install_plugin "templater-obsidian" "templater-obsidian" "https://github.com/SilentVoid13/Templater/releases/latest/download/main.js"
@@ -45,9 +45,6 @@ EOF
       install_plugin "periodic-notes" "periodic-notes" "https://github.com/liamcain/obsidian-periodic-notes/releases/latest/download/main.js"
       install_plugin "highlightr-plugin" "highlightr-plugin" "https://github.com/chetachiezikeuzor/Highlightr-Plugin/releases/latest/download/main.js"
       
-      echo "Obsidian plugins installed successfully!"
-      
-      # Also create community-plugins.json to force Obsidian to recognize them
       cat > "$OBSIDIAN_PLUGINS_DIR/community-plugins.json" << EOF
 [
   "obsidian-tasks-plugin",
@@ -62,8 +59,6 @@ EOF
   in lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [ -d "/Applications/Obsidian.app" ]; then
       ${pluginScript}
-    else
-      echo "Obsidian not installed yet. Run 'brew install --cask obsidian' first."
     fi
   '';
 }

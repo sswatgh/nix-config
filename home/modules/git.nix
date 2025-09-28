@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, platform, ... }:
 
 {
   programs.git = {
@@ -8,7 +8,7 @@
     
     extraConfig = {
       credential.helper = 
-        if pkgs.stdenv.isDarwin 
+        if platform.isDarwin 
         then "osxkeychain" 
         else "cache --timeout=3600";
     };
@@ -19,8 +19,6 @@
       st = "status";
       br = "branch";
       hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
-      type = "cat-file -t";
-      dump = "cat-file -p";
       nixup = "!git add . && git commit -m 'nix: update configuration' && git push";
     };
   };

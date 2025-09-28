@@ -1,10 +1,9 @@
-{ pkgs, ... }: 
+{ pkgs, platform, ... }: 
 {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
     settings = {
-      # Customize your starship prompt
       add_newline = true;
       format = "$all";
       character = {

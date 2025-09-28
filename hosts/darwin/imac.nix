@@ -1,7 +1,19 @@
-{ pkgs, config, ... }: 
+{ config, pkgs, platform, ... }: 
 
 {
-  system =  {
+  imports = [
+    ../../modules/darwin/homebrew.nix
+    ../../modules/darwin/networking.nix
+  ];
+
+  nix = {
+    enable = false;
+    settings.experimental-features = "nix-command flakes";
+  };
+
+   nixpkgs.config.allowUnfree = true;
+
+   system =  {
     primaryUser = "ssw";
     activationScripts.alacrittyPosition = {
       text = ''
@@ -15,14 +27,4 @@
     };
     stateVersion = 4;
   };
- 
-  nix = {
-    enable = false;
-    settings.experimental-features = "nix-command flakes";
-  };
- 
-  imports = [
-    ../../modules/darwin/homebrew.nix
-    ../../modules/darwin/networking.nix
-  ];
 }
