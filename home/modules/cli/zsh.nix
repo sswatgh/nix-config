@@ -26,6 +26,7 @@
       ndr = "sudo darwin-rebuild switch --flake .#imac";
       nupdr = "nix flake update && sudo darwin-rebuild switch --flake .#imac";
       ncupdr = "cd ~/nix-config && nix flake update && sudo darwin-rebuild switch --flake .#imac";
+      ncupdrthinkpad = "cd ~/nix-config && nix flake update && nix run home-manager/master -- switch --flake .#ssw@NBKB2K";
       vim = "nvim";
       vi = "nvim";  
     };
