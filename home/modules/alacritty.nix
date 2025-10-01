@@ -1,4 +1,4 @@
-{ pkgs, platform, ... }:
+{ pkgs, ... }:
 
 {
   programs.alacritty = {
@@ -6,9 +6,9 @@
     settings = {
       window = {
         opacity = 0.9;
-        decorations = if platform.isDarwin then "none" else "full";
+        decorations = "none";
         dimensions = {
-          columns = 120;
+          columns = 240;
           lines = 68;
         };   
         position = { 
@@ -38,11 +38,11 @@
       };
 
       font = {
-        size = 18;
-        normal.family = if platform.isDarwin then "Menlo" else "Monospace";
+        size = 24;
+        normal.family = "Menlo";
       };
 
-      shell.program = "${pkgs.zsh}/bin/zsh";
+      terminal.shell.program = "${pkgs.zsh}/bin/zsh";
     };
   };
 }
