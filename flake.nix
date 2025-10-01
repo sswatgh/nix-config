@@ -92,7 +92,7 @@
               imports = [
                 ./home/base.nix
                 ./home/linux.nix
-              ] ++ (importModules ./home/modules);
+              ] ++ (importModules ./home/modules/cli);
               _module.args.platform = withPlatform nixpkgs.legacyPackages.x86_64-linux;
             };
           };
@@ -111,7 +111,7 @@
       modules = [
         ./home/base.nix
         ./home/linux.nix
-      ] ++ (importModules ./home/modules);
+      ] ++ (importModules ./home/modules/cli);
     };
   };
 }
