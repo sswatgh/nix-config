@@ -64,7 +64,7 @@
               imports = [
                 ./home/base.nix
                 ./home/macos.nix
-              ] ++ (importModules ./home/modules);
+              ] ++ (importModules ./home/modules/cli);
               _module.args.platform = withPlatform nixpkgs.legacyPackages.x86_64-darwin;
             };
           };
@@ -92,7 +92,7 @@
               imports = [
                 ./home/base.nix
                 ./home/linux.nix
-              ] ++ (importModules ./home/modules/cli);
+              ] ++ (importModules ./home/modules/cli ./home/modules/gui);
               _module.args.platform = withPlatform nixpkgs.legacyPackages.x86_64-linux;
             };
           };
