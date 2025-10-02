@@ -1,15 +1,10 @@
 { config, pkgs, platform, ... }:
-
 {
-  home.sessionVariables = {
-    DISPLAY = ":0";
-  };
-
-  programs = {
-  };
+  imports = [
+    ./base.nix
+  ];
 
   home.packages = with pkgs; [
     wslu
-    xorg.xhost
   ];
 }

@@ -6,7 +6,7 @@
     settings = {
       window = {
         opacity = 0.9;
-        decorations = "none";
+        decorations = "full";
         dimensions = {
           columns = 240;
           lines = 68;
