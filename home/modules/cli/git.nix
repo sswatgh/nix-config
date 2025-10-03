@@ -7,10 +7,11 @@
     userEmail = "mail4ssw@tuta.io";
     
     extraConfig = {
+      init.defaultBranch = "main";
+      pull.rebase = false;
       credential.helper = 
-        if platform.isDarwin 
-        then "osxkeychain" 
-        else "cache --timeout=3600";
+        if platform.isDarwin then "osxkeychain" 
+        else "store";  
     };
     
     aliases = {
@@ -19,7 +20,7 @@
       st = "status";
       br = "branch";
       hist = "log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
-      nixup = "!git add . && git commit -m 'nix: update configuration' && git push";
+      nixup = "!git add . && git commit -m 'nix: update config' && git push";
     };
   };
 }
