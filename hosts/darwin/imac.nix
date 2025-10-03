@@ -1,11 +1,6 @@
 { config, pkgs, platform, ... }: 
 
 {
-  imports = [
-    ../../modules/darwin/homebrew.nix
-    ../../modules/darwin/networking.nix
-  ];
-
   nix = {
     enable = false;
     settings.experimental-features = "nix-command flakes";
