@@ -1,20 +1,19 @@
 { lib, platform, pkgs, ... }:
+
 {
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = false;
-
-    extraConfig = lib.mkMerge [
-      ''
-        AddKeysToAgent yes
-        ControlMaster auto
-        ControlPath ~/.ssh/master-%r@%h:%p
-        ControlPersist 10m
-      ''
-      (lib.optionalString platform.isDarwin "UseKeychain yes")
-    ];
+    enableDefaultConfig = false;  
     
     matchBlocks = {
+      "*" = {
+        addKeysToAgent = "yes";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%h:%p";
+        controlPersist = "10m";
+        useKeychain = lib.mkIf platform.isDarwin "yes";
+      };
+      
       "github.com" = {
         user = "git";
         identityFile = "~/.ssh/id_ed25519";
