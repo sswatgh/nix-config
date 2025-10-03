@@ -2,7 +2,8 @@
 {
   programs.ssh = {
     enable = true;
-    
+    enableDefaultConfig = false;
+
     extraConfig = lib.mkMerge [
       ''
         AddKeysToAgent yes
