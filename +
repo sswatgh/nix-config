@@ -4,18 +4,18 @@ let
     if builtins.pathExists dir then
       let
         entries = builtins.readDir dir;
-        files = builtins.attrNames (builtins.filter (name: type: 
+        nixFiles = builtins.attrNames (builtins.filter (name: type: 
           type == "regular" && builtins.match ".*\\.nix" name != null
         ) entries);
-        directories = builtins.attrNames (builtins.filter (name: type: 
+        subdirs = builtins.attrNames (builtins.filter (name: type: 
           type == "directory"
         ) entries);
-        fileImports = map (f: dir + "/${f}") files;
-        dirImports = builtins.concatLists (map (d: 
-          importModules (dir + "/${d}")
-        ) directories);
+        currentImports = map (f: dir + "/${f}") nixFiles;
+        subdirImports = builtins.concatLists (map (subdir: 
+          importModules (dir + "/${subdir}")
+        ) subdirs);
       in
-        fileImports ++ dirImports
+        currentImports ++ subdirImports
     else [];
 in
 {
@@ -26,7 +26,6 @@ in
   imports = (importModules ./modules/cli);
 
   home.packages = with pkgs; [
-    git
     wget
     curl
     htop

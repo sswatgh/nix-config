@@ -61,10 +61,13 @@
             useUserPackages = true;
             backupFileExtension = "bak";
             users.ssw = {
-              imports = [
-                ./home/base.nix
-                ./home/macos.nix
-              ] ++ (importModules ./home/modules/cli);
+              home.username = "ssw";
+              home.homeDirectory = "/Users/ssw";
+              home.stateVersion = "23.11";
+
+              imports = (importModules ./home/modules/cli) ++ 
+                       (importModules ./home/modules/gui);
+              
               _module.args.platform = withPlatform nixpkgs.legacyPackages.x86_64-darwin;
             };
           };
@@ -89,10 +92,12 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             users.ssw = {
-              imports = [
-                ./home/base.nix
-                ./home/linux.nix
-              ] ++ (importModules ./home/modules/cli ./home/modules/gui);
+              home.username = "ssw";
+              home.homeDirectory = "/home/ssw";
+              home.stateVersion = "23.11";
+              
+              imports = (importModules ./home/modules/cli);
+              
               _module.args.platform = withPlatform nixpkgs.legacyPackages.x86_64-linux;
             };
           };
@@ -109,8 +114,12 @@
         platform = withPlatform nixpkgs.legacyPackages.x86_64-linux;
       };
       modules = [
-        ./home/base.nix
-        ./home/linux.nix
+        {
+          home.username = "ssw";
+          home.homeDirectory = "/home/ssw";
+          home.stateVersion = "23.11";
+          
+        }
       ] ++ (importModules ./home/modules/cli);
     };
   };
