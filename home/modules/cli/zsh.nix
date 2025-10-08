@@ -29,7 +29,7 @@
       nupdr = "nix flake update && sudo darwin-rebuild switch --flake .#imac";
       ncupdr = "cd ~/nix-config && nix flake update && sudo darwin-rebuild switch --flake .#imac";
       ncupdrthinkpad = "cd ~/nix-config && nix flake update && nix run home-manager/master -- switch --flake .#ssw@NBKB2K";
-      ngo = "cd ~/Nextcloud2/main\ vault/sources/Imperative\ Programmierung/go";      
+      ngo = "cd ~/Nextcloud2/main vault/sources/Imperative Programmierung/go";      
       vi = "nvim";  
     };
 
